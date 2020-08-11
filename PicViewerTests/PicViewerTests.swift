@@ -2,7 +2,7 @@
 //  PicViewerTests.swift
 //  PicViewerTests
 //
-//  Created by Vijay on 11/08/20.
+//  Created by Penchal on 11/08/20.
 //  Copyright © 2020 senix.com. All rights reserved.
 //
 
