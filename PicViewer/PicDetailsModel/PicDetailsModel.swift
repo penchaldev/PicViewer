@@ -2,14 +2,14 @@
 //  PicDetailsModel.swift
 //  PicViewer
 //
-//  Created by Vijay on 11/08/20.
+//  Created by Penchal on 11/08/20.
 //  Copyright © 2020 senix.com. All rights reserved.
 //
 
 import Foundation
 
-// MARK: - WelcomeElement
-struct WelcomeElement: Codable {
+// MARK: - PicDetails
+struct PicModel: Codable {
     let id, author: String
     let width, height: Int
     let url, downloadURL: String
@@ -20,4 +20,4 @@ struct WelcomeElement: Codable {
     }
 }
 
-typealias Welcome = [WelcomeElement]
+typealias picDetails = [PicModel]

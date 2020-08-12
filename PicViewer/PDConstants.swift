@@ -18,7 +18,7 @@ let baseUrl = "https://picsum.photos/v2/list?page=2&limit=20"
 
 //MARK: - Cell Identifiers -
 
-let tableCell = "UserDetailsCell"
+let tableCell = "PicDetailsCell"
 
 //MARK: - Storyboard IDs -
 

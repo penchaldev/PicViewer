@@ -1,5 +1,5 @@
 //
-//  PDNetworkManager.swift
+//  PVNetworkManager.swift
 //  PicViewer
 //
 //  Created by Penchal on 11/08/20.
@@ -11,10 +11,9 @@
 import Foundation
 import UIKit
 
+class PVNetworkManager: NSObject,URLSessionDelegate {
 
-class PDNetworkManager: NSObject,URLSessionDelegate {
-
-    static let sharedInstance = PDNetworkManager()
+    static let sharedInstance = PVNetworkManager()
     
     // Configuration
     static var task: URLSessionTask?
@@ -31,7 +30,7 @@ class PDNetworkManager: NSObject,URLSessionDelegate {
     
  //MARK: - Get SERVICE CALL -
     
-static func getServiceCall(completionHandler:@escaping(UserDetails) -> Void){
+static func getServiceCall(completionHandler:@escaping(picDetails) -> Void){
     
     if !Reachability.isConnectedToNetwork() {
         DispatchQueue.main.async {
@@ -58,11 +57,11 @@ static func getServiceCall(completionHandler:@escaping(UserDetails) -> Void){
                 case .success:
                     if let data = responseData, let _ = String(data: data, encoding: .utf8) {
                         do {
-                          let weatherResponse = try JSONDecoder().decode(UserDetails.self, from: data)
-//                            print(weatherResponse)
+                          let apiResponse = try JSONDecoder().decode(picDetails.self, from: data)
+                            print(apiResponse)
                             
                             DispatchQueue.main.async {
-                                completionHandler(weatherResponse)
+                                completionHandler(apiResponse)
                             }
                         }
                         catch let error {
@@ -80,53 +79,6 @@ static func getServiceCall(completionHandler:@escaping(UserDetails) -> Void){
     }
 }
     
-    static func getMapServiceCall(baseUrl:String,completionHandler:@escaping(_ data:Data) -> Void) {
-        
-        if !Reachability.isConnectedToNetwork() {
-            DispatchQueue.main.async {
-                let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
-                keyWindow?.rootViewController?.showAlert(message: keyNetConnect, title: keyError)
-            }
-            return
-        }
-        
-        DispatchQueue.global(qos:.userInitiated).async {
-            var request =  URLRequest(url: URL(string:baseUrl)!)
-            request.httpMethod = HTTPMethod.get.rawValue
-            
-            var headers = request.allHTTPHeaderFields ?? [:]
-            headers["Content-Type"] = "application/json"
-            request.allHTTPHeaderFields = headers
-            print("Final Request:::",request)
-            
-            task = session.dataTask(with: request, completionHandler: { (responseData, response, responseError) in
-                if let response = response as? HTTPURLResponse {
-                    let result = self.handleNetworkResponse(response)
-                    switch result {
-                    case .success:
-                        if let data = responseData, let _ = String(data: data, encoding: .utf8) {
-                            do {
-                                let weatherResponse = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-    //                            print(weatherResponse)
-                                
-                                DispatchQueue.main.async {
-                                    completionHandler(data)
-                                }
-                            }
-                            catch let error {
-                                print("Parsing Error:\(error)")
-                            }
-                        }
-                    case .unautherized:
-                        return
-                    case .failure(_):
-                        return
-                    }
-                }
-            })
-            task?.resume()
-        }
-    }
 
  static func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String> {
     switch response.statusCode {
