@@ -18,7 +18,7 @@ let baseUrl = "https://picsum.photos/v2/list?page=2&limit=20"
 
 //MARK: - Cell Identifiers -
 
-let tableCell = "PicDetailsCell"
+let tableCell = "cell"
 
 
 //MARK: - Alert Messages -
@@ -29,7 +29,7 @@ let keyNetConnect = "Please connect to Internet"
 
 //MARK: - Network Responses -
 
-enum NetworkResponse:String {
+enum NetworkResponse: String {
     case success
     case unautherized
     case authenticationError = "You need to be authenticated first."
@@ -40,18 +40,18 @@ enum NetworkResponse:String {
     case unableToDecode = "We could not decode the response."
 }
 
-enum Result<String>{
+enum Result<String> {
     case success
     case failure(String)
     case unautherized
 }
 
-enum HTTPMethod:String {
-    case get     = "GET"
-    case post    = "POST"
-    case put     = "PUT"
-    case patch   = "PATCH"
-    case delete  = "DELETE"
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case patch = "PATCH"
+    case delete = "DELETE"
 }
 
 

@@ -20,7 +20,7 @@ public enum ActivityIndicatorStyle {
 
 class CHWActivityIndicatorStyle: NSObject {
     static let shared = CHWActivityIndicatorStyle()
-    private override init() {}
+    private override init() { }
 
     /**
      Create Activity-Indicator based on provided style
@@ -47,7 +47,7 @@ class CHWActivityIndicatorStyle: NSObject {
     }
 
     // MARK: - Line Fade Spinner
-    
+
     func createCircularLineFadingActivityIndicator(in layer: CALayer, size: CGSize, color: UIColor) {
         let lineSpacing: CGFloat = 1
         let lineSize = CGSize(width: (size.width - 20 * lineSpacing) / 5, height: (size.height - 6 * lineSpacing) / 3)
@@ -120,7 +120,7 @@ class CHWActivityIndicatorStyle: NSObject {
 
         return layer
     }
-    
+
 // MARK: - Ball Spin Fade Spinner -
 
     func createCircularSpinningBallWithFadingActivityIndicator(in layer: CALayer, size: CGSize, color: UIColor) {
@@ -202,7 +202,7 @@ class CHWActivityIndicatorStyle: NSObject {
     }
 
     // MARK: - Ball Spin Spinner -
-    
+
     func createCircularSpinninBallActivityIndicator(in layer: CALayer, size: CGSize, color: UIColor) {
         let circleSize = size.width / 4
 
@@ -265,7 +265,7 @@ class CHWActivityIndicatorStyle: NSObject {
         return layer
     }
 
-     // MARK: - Half Circle Spin Spinner -
+    // MARK: - Half Circle Spin Spinner -
 
     func createTwoHalfCircleSpinningActivityIndicator(in layer: CALayer, size: CGSize, color: UIColor) {
         let bigCircleSize: CGFloat = size.width

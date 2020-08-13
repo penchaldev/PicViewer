@@ -273,11 +273,11 @@ public class CHWActivityIndicator: NSObject {
 //        NotificationCenter.default.addObserver(self, selector: #selector(configureActivityIndicatorPosition), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(configureActivityIndicatorPosition), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(configureActivityIndicatorPosition), name: UIResponder.keyboardDidHideNotification, object: nil)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(configureActivityIndicatorPosition), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(configureActivityIndicatorPosition), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
 

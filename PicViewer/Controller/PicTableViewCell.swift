@@ -10,12 +10,12 @@ import UIKit
 
 class PicTableViewCell: UITableViewCell {
 
-    
-    @IBOutlet weak var tableCellPiture:UIImageView!
-    @IBOutlet weak var picID:UILabel!
-    @IBOutlet weak var authorName:UILabel!
 
-    
+    @IBOutlet weak var tableCellPiture: UIImageView!
+    @IBOutlet weak var picID: UILabel!
+    @IBOutlet weak var authorName: UILabel!
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
