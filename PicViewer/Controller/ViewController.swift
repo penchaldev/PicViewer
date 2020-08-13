@@ -64,7 +64,7 @@ class ViewController: UIViewController {
 extension ViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("pic data Count: \(picData?.count)")
+        
         return picData?.count ?? 0
     }
     
@@ -73,29 +73,31 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
         let cell = picTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PicTableViewCell
             cell.authorName.text = ("Author: \(picData?[indexPath.row].author ?? "")")
             cell.picID.text = ("ID: \(picData?[indexPath.row].id ?? "")")
+        
         let image = self.picData?[indexPath.row].downloadURL
             print("Pic Url In Cell for : \(image)")
         
-            DispatchQueue.global().async {
-                if let url = URL(string: image ?? "")  {
-                    if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            cell.tableCellPiture.image = image
-                        }
-                     }
+        DispatchQueue.global().async {
+            if let url = URL(string: image ?? "")  {
+                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.tableCellPiture.image = image
+                    }
                 }
             }
-
+        }
+        
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+    
         return view.frame.height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         self.showAlert(message: ("Author: \(picData?[indexPath.row].author ?? "")"), title: ("ID: \(picData?[indexPath.row].id ?? "")"))
     }
     
@@ -103,7 +105,6 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
         
         print("Printing the upcoming index: \(indexPath.row)")
     }
-    
     
 }
 
