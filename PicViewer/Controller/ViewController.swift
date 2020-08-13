@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshTableViewController()
-
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
