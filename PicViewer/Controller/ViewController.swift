@@ -12,11 +12,11 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var picTableView: UITableView!
     var picData: [PicModel]?
-    //    var picData: picDetails?
-    //     var picData: [[PicModel]]?
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshTableViewController()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: Fetching data through API Call
+    
     func serverCalls() {
         
         showActivityIndicator(progressLabel: "Fetching Data")
@@ -37,7 +39,6 @@ class ViewController: UIViewController {
             
             print("Image URL: \(self.picData?[0].url)")
             print("Download URL \(self.picData?[0].downloadURL)")
-//          print("Fetched Data: \(weatherObject)")
             
             DispatchQueue.main.async {
                 self.hideActivityIndicator()
@@ -45,7 +46,20 @@ class ViewController: UIViewController {
             }
         }
     }
+    func refreshTableViewController(){
+               refreshControl.addTarget(self, action: #selector(pullToRefresh(sender:)), for: .valueChanged)
+               picTableView.refreshControl = refreshControl
+           }
+       
+    @objc func pullToRefresh(sender: UIRefreshControl){
+        print("Performing Pull-Refresh")
+        self.picTableView.reloadData()
+              
+    }
+    
 }
+
+//MARK: Table View delegate and datasource methods
 
 extension ViewController:UITableViewDelegate,UITableViewDataSource {
     
@@ -56,7 +70,6 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! PicTableViewCell
         let cell = picTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PicTableViewCell
             cell.authorName.text = ("Author: \(picData?[indexPath.row].author ?? "")")
             cell.picID.text = ("ID: \(picData?[indexPath.row].id ?? "")")
@@ -76,14 +89,20 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return view.frame.height
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.showAlert(message: ("Author: \(picData?[indexPath.row].author ?? "")"), title: ("ID: \(picData?[indexPath.row].id ?? "")"))
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        print("Printing the upcoming index: \(indexPath.row)")
+    }
     
     
 }

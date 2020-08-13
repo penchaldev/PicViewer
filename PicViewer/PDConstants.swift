@@ -20,9 +20,6 @@ let baseUrl = "https://picsum.photos/v2/list?page=2&limit=20"
 
 let tableCell = "PicDetailsCell"
 
-//MARK: - Storyboard IDs -
-
-let keyUserDetailsVC = "UserDetailsViewController"
 
 //MARK: - Alert Messages -
 
@@ -61,4 +58,3 @@ enum HTTPMethod:String {
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
-//customer name, customer number,  latitude, longitude

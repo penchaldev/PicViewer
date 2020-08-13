@@ -79,7 +79,8 @@ static func getServiceCall(completionHandler:@escaping(picDetails) -> Void){
     }
 }
     
-
+    // Network Response cases
+    
  static func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String> {
     switch response.statusCode {
         case 200...299: return .success
